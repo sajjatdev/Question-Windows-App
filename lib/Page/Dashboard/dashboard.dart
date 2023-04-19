@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 import 'package:question/utility/localDB.dart';
@@ -20,6 +22,7 @@ class DashboardView extends StatelessWidget {
           Provider.of<DashboardProvider>(context).startTimerAction(context);
         }
         return Scaffold(
+          backgroundColor: HexColor("#E7D2AB"),
           body: Stack(
             alignment: Alignment.center,
             children: [
@@ -50,21 +53,23 @@ class DashboardView extends StatelessWidget {
                       fontSize: 20.sp,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
+                      fontFamily: GoogleFonts.oswald().fontFamily,
                     ),
                   ),
                 ),
               ),
               Positioned(
-                top: 10.w,
-                left: 14.w,
+                top: 8.w,
+                left: 16.w,
                 child: Text(
                   LocalDB.getPoint != null
-                      ? LocalDB.getPoint.toString()
+                      ? LocalDB.getPoint.toString() + ".0"
                       : "00.0",
                   style: TextStyle(
                     fontSize: 20.sp,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'Alkatra',
                   ),
                 ),
               ),
@@ -74,10 +79,10 @@ class DashboardView extends StatelessWidget {
                   top: 50.sp,
                   child: Text(
                     stateAction.data[stateAction.itemCount]['title'],
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(fontSize: 12.sp, color: Colors.white),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        fontSize: 10.sp,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
                 Positioned(
@@ -94,22 +99,21 @@ class DashboardView extends StatelessWidget {
                               child: GestureDetector(
                                 onTap: () {
                                   Provider.of<DashboardProvider>(context,
-                                          listen: false)
-                                      .onSelectItemAction(
-                                    qid: stateAction.data[stateAction.itemCount]
-                                        ['id'],
-                                    selete: e['value'],
-                                  );
+                                      listen: false)
+                                    ..onSelectItemAction(
+                                      qid: stateAction
+                                          .data[stateAction.itemCount]['id'],
+                                      selete: e['value'],
+                                      answer: stateAction
+                                              .data[stateAction.itemCount]
+                                          ['answer'],
+                                      point: stateAction
+                                          .data[stateAction.itemCount]['point'],
+                                    )
+                                    ..startTimerAction(context, isClick: true);
                                 },
                                 child: Container(
                                   width: 100.w,
-                                  color: stateAction.data[stateAction.itemCount]
-                                                  ['id'] ==
-                                              stateAction.seleteItem['qid'] &&
-                                          e['value'] ==
-                                              stateAction.seleteItem['select']
-                                      ? Colors.red
-                                      : Colors.green,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Row(
@@ -120,8 +124,34 @@ class DashboardView extends StatelessWidget {
                                               .textTheme
                                               .bodyLarge!
                                               .copyWith(
-                                                  fontSize: 8.sp,
-                                                  color: Colors.white),
+                                                fontSize: 8.sp,
+                                                fontWeight: stateAction.data[
+                                                                    stateAction
+                                                                        .itemCount]
+                                                                ['id'] ==
+                                                            stateAction
+                                                                    .seleteItem[
+                                                                'qid'] &&
+                                                        e['value'] ==
+                                                            stateAction
+                                                                    .seleteItem[
+                                                                'select']
+                                                    ? FontWeight.bold
+                                                    : FontWeight.normal,
+                                                color: stateAction.data[stateAction
+                                                                    .itemCount]
+                                                                ['id'] ==
+                                                            stateAction
+                                                                    .seleteItem[
+                                                                'qid'] &&
+                                                        e['value'] ==
+                                                            stateAction
+                                                                    .seleteItem[
+                                                                'select']
+                                                    ? Color.fromARGB(
+                                                        255, 0, 77, 3)
+                                                    : Colors.black,
+                                              ),
                                         ),
                                         SizedBox(
                                           width: 10.sp,
@@ -132,8 +162,34 @@ class DashboardView extends StatelessWidget {
                                               .textTheme
                                               .bodyLarge!
                                               .copyWith(
-                                                  fontSize: 8.sp,
-                                                  color: Colors.white),
+                                                fontSize: 8.sp,
+                                                fontWeight: stateAction.data[
+                                                                    stateAction
+                                                                        .itemCount]
+                                                                ['id'] ==
+                                                            stateAction
+                                                                    .seleteItem[
+                                                                'qid'] &&
+                                                        e['value'] ==
+                                                            stateAction
+                                                                    .seleteItem[
+                                                                'select']
+                                                    ? FontWeight.bold
+                                                    : FontWeight.normal,
+                                                color: stateAction.data[stateAction
+                                                                    .itemCount]
+                                                                ['id'] ==
+                                                            stateAction
+                                                                    .seleteItem[
+                                                                'qid'] &&
+                                                        e['value'] ==
+                                                            stateAction
+                                                                    .seleteItem[
+                                                                'select']
+                                                    ? Color.fromARGB(
+                                                        255, 0, 77, 3)
+                                                    : Colors.black,
+                                              ),
                                         ),
                                         SizedBox(
                                           height: 20.sp,

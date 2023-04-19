@@ -9,12 +9,13 @@ class ResultProvider extends ChangeNotifier {
   void initAnswerAction(
       BuildContext context, List<Map<String, dynamic>> answerList) {
     LocalDB.setPoint(20);
-    Future.delayed(
-      const Duration(seconds: 3),
-      () => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => StartView()),
-      ),
-    );
+    print(answerList);
+    // Future.delayed(
+    //   const Duration(seconds: 3),
+    //   () => Navigator.of(context).pushReplacement(
+    //     MaterialPageRoute(builder: (context) => StartView()),
+    //   ),
+    // );
     notifyListeners();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:question/utility/localDB.dart';
 import 'package:sizer/sizer.dart';
 
@@ -8,6 +9,7 @@ class StartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: HexColor("#E7D2AB"),
       body: Stack(
         children: [
           Image.asset(
@@ -17,8 +19,8 @@ class StartView extends StatelessWidget {
             fit: BoxFit.fill,
           ),
           Positioned(
-            top: 10.w,
-            left: 14.w,
+            top: 8.w,
+            left: 15.w,
             child: Text(
               LocalDB.getPoint != null
                   ? LocalDB.getPoint.toString() + ".0"
@@ -27,6 +29,7 @@ class StartView extends StatelessWidget {
                 fontSize: 20.sp,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Alkatra',
               ),
             ),
           ),
